@@ -12,7 +12,7 @@
 
 二、效果预览
 --
-![Alt text](./1529904756387.png)
+![Alt text](https://github.com/464884492/blog/blob/master/images/exceldemo.png)
 
 三、数据格式
 --
