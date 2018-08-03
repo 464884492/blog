@@ -92,15 +92,21 @@ public void onMessage(javax.jms.Message message) {
 });
 ```
 运行效果
+
 ![Alt text](https://github.com/464884492/blog/blob/master/images/activemq_result.png)
+
 可见，我们生产者，产生的10条消息，已成功被消费者处理了。
 
 三、监控嵌入的ActiveMQ
 ----
 对于嵌入的ActiveMQ，在BrokerService启动前需要设置 broker.setUseJmx(true);然后找到你的JAVA_HOME,切换到bin，输入jconsole命令。
+
 ![Alt text](https://github.com/464884492/blog/blob/master/images/activemq_cmd.png)
+
 待jconsole启动后，选择ActiveMQ所在的进程。连接后选择Mbean页签
-![Alt text](https://github.com/464884492/blog/blob/master/images/activem_jconsole.png)
+
+![Alt text](https://github.com/464884492/blog/blob/master/images/activemq_jconsole.png)
+
 红框的地方分别为已消费和已进入MQ中的消息的条数。选择操作，找到那个SendTextMessage还可以想此队列发送消息。
 四、Selvelt跟随Tomcat启动
 ----
