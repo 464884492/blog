@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>首页</title>
+
+</head>
+<body>
+    <div>
+        <header>当前总线上消息</header>
+        <content>
+            <textarea id="textAll" style="width:100%;height:100px;"></textarea>
+        </content>
+    </div>
+    <br />
+    <div>
+        <header>组件1，接收消息编码为codeone的内容</header>
+        <textarea id="textone" style="width:100%;height:100px;"></textarea>
+    </div>
+    <br />
+    <div>
+        <header>组件2，接收消息编码为codetwo的内容</header>
+        <textarea id="texttwo" style="width:100%;height:100px;"></textarea>
+    </div>
+    <script type="text/javascript">
+        var work = new Worker('webworker.js')
+            , textone = document.querySelector("#textone")
+            , textTwo = document.querySelector("#texttwo")
+        textAll = document.querySelector("#textAll");
+
+        work.onmessage = function (event) {
+            var data = event.data;
+            if (!!data.code) {
+                switch (data.code) {
+                    case "close":
+                        work.terminate();
+                    case "codeone":
+                        textone.value = textone.value + JSON.stringify(data) + "\r\n";
+                        textAll.value = textAll.value + JSON.stringify(data) + "\r\n";
+                        break;
+                    case "codetwo":
+                        textTwo.value = textTwo.value + JSON.stringify(data) + "\r\n";
+                        textAll.value = textAll.value + JSON.stringify(data) + "\r\n";
+                        break;
+                    default:
+                        textAll.value = textAll.value + JSON.stringify(data) + "\r\n";
+                }
+            }
+        };
+        work.postMessage({
+            code: "init",
+            loggedUserId: 'userone',
+            sessionid: 'usersession'
+        });
+    </script>
+
+</body>
+</html>
