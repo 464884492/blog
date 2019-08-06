@@ -1,0 +1,84 @@
+2019-08-05T06:41:13.928Z - normal: Load ~/.CocosCreator/settings.json
+2019-08-05T06:41:15.971Z - normal: Initializing Asset Database
+2019-08-05T06:41:16.945Z - normal: checking language setting...
+2019-08-05T06:41:16.946Z - normal: Language: zh
+2019-08-05T06:41:20.411Z - success: preview server running at http://localhost:7456
+2019-08-05T06:41:20.423Z - success: protocol editor-framework registered
+2019-08-05T06:41:20.423Z - success: protocol app registered
+2019-08-05T06:41:20.423Z - success: protocol theme registered
+2019-08-05T06:41:20.424Z - success: protocol packages registered
+2019-08-05T06:41:20.425Z - success: protocol uuid registerred
+2019-08-05T06:41:20.425Z - success: protocol db registerred
+2019-08-05T06:41:20.425Z - success: protocol thumbnail registerred
+2019-08-05T06:41:20.426Z - success: protocol unpack registerred
+2019-08-05T06:41:20.426Z - success: protocol disable-commonjs registerred
+2019-08-05T06:41:20.678Z - normal: connected!
+2019-08-05T06:41:20.683Z - normal: Check project D:\minigame\start_project
+2019-08-05T06:41:20.692Z - normal: Initializing project D:\minigame\start_project
+2019-08-05T06:41:22.779Z - normal: Initializing Cocos2d
+2019-08-05T06:41:27.030Z - normal: Initializing engine extends
+2019-08-05T06:41:27.123Z - success: asset-db-debugger loaded
+2019-08-05T06:41:27.126Z - success: baidu-adapter loaded
+2019-08-05T06:41:27.128Z - success: color-picker loaded
+2019-08-05T06:41:27.597Z - success: fb-audience-network loaded
+2019-08-05T06:41:27.859Z - success: fb-live-stream loaded
+2019-08-05T06:41:27.873Z - success: google-play-instant loaded
+2019-08-05T06:41:27.892Z - success: huawei-runtime loaded
+2019-08-05T06:41:29.244Z - success: cpk-publish loaded
+2019-08-05T06:41:29.247Z - success: jsb-adapter loaded
+2019-08-05T06:41:29.271Z - success: oppo-runtime loaded
+2019-08-05T06:41:29.284Z - success: package-manager loaded
+2019-08-05T06:41:30.016Z - success: qqplay-adapter loaded
+2019-08-05T06:41:30.023Z - success: runtime-dev-tools loaded
+2019-08-05T06:41:30.040Z - success: sdkbox loaded
+2019-08-05T06:41:30.051Z - success: tester loaded
+2019-08-05T06:41:30.059Z - success: ui-grid loaded
+2019-08-05T06:41:30.069Z - success: ui-kit-preview-extra loaded
+2019-08-05T06:41:30.076Z - success: ui-kit-preview loaded
+2019-08-05T06:41:30.086Z - success: ui-kit loaded
+2019-08-05T06:41:30.094Z - success: ui-tree loaded
+2019-08-05T06:41:30.117Z - success: vivo-runtime loaded
+2019-08-05T06:41:30.119Z - success: weapp-adapter loaded
+2019-08-05T06:41:30.122Z - success: xiaomi-adapter loaded
+2019-08-05T06:41:30.426Z - success: assets loaded
+2019-08-05T06:41:30.435Z - success: builder loaded
+2019-08-05T06:41:32.174Z - success: cocos-services loaded
+2019-08-05T06:41:32.200Z - success: console loaded
+2019-08-05T06:41:32.435Z - success: fb-instant-games loaded
+2019-08-05T06:41:32.440Z - success: google-instant-games loaded
+2019-08-05T06:41:32.459Z - success: hierarchy loaded
+2019-08-05T06:41:32.468Z - success: inspector loaded
+2019-08-05T06:41:32.472Z - success: keystore loaded
+2019-08-05T06:41:32.514Z - success: node-library loaded
+2019-08-05T06:41:32.522Z - success: package-asset loaded
+2019-08-05T06:41:32.528Z - success: preferences loaded
+2019-08-05T06:41:32.533Z - success: project-exporter loaded
+2019-08-05T06:41:32.540Z - success: project-importer loaded
+2019-08-05T06:41:32.547Z - success: project-settings loaded
+2019-08-05T06:41:32.562Z - success: scene loaded
+2019-08-05T06:41:32.569Z - success: simulator-debugger loaded
+2019-08-05T06:41:32.574Z - success: sprite-editor loaded
+2019-08-05T06:41:32.588Z - success: store loaded
+2019-08-05T06:41:32.605Z - success: timeline loaded
+2019-08-05T06:41:32.638Z - success: xiaomi-runtime loaded
+2019-08-05T06:41:39.796Z - info: Cocos Services load base data!
+2019-08-05T06:41:41.933Z - normal: Loading packages
+2019-08-05T06:41:41.957Z - normal: Watching packages
+2019-08-05T06:41:44.188Z - normal: Run Application
+2019-08-05T06:42:16.735Z - warn: Please change the definition of property 'scoreClip' in class 'Index'. Starting from v1.10,
+properties in CCClass can not be abbreviated if they are of type RawAsset.
+Please use the complete form.
+For example, if the type is Texture2D, the previous definition is:
+    scoreClip: cc.Texture2D,
+If you use JS, it should be changed to:
+    scoreClip: {
+      type: cc.Texture2D // use 'type:' to define Texture2D object directly
+      default: null,     // object's default value is null
+    },
+If you use TS, it should be changed to:
+    %s: {
+      type: cc.Texture2D // use 'type:' to define Texture2D object directly
+    }
+    %s: cc.Texture2D = null;
+(This helps us to successfully refactor all RawAssets at v2.0, sorry for the inconvenience. 😰 )
+2019-08-05T10:18:07.111Z - info: shutdown preview server
