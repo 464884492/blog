@@ -7,9 +7,9 @@
 
 ##配置word模版
 采用${xx}方式配置标签，如果是表格在对应一行一列配置表格名称
-![](http://i.imgur.com/WgxXLjE.jpg)
+![](https://raw.githubusercontent.com/464884492/blog/master/images/poiword_template.jpg)
 **注意**在word文档中，如果两个相近的字符样式不同，word默认会保存在不同的`RUN`元素中，由此很多朋友在配置好以后都需要保存为一个单独的文件，然后不把不在一起的标签合并到一个`RUN`元素中，如果文件比较大，我相信这绝对是一个比较痛苦的事情，这里将会侧重处理这个问题.我的解决方案是只保留第一`RUN`的样式其他的删掉
-![](http://i.imgur.com/Pj5xevs.jpg)
+![](https://raw.githubusercontent.com/464884492/blog/master/images/poiword_prve.jpg)
 ##解析word模板
 首先需要将文件转换为`XWPFDocument`对象，可以通过流的当时，也可以通过`opcpackage`,不过如果使用`opcpackage`打开的方式，打开的文件和最终生成的文件不能够是同一个文件，我这里采用文件流的方式
 ```java
