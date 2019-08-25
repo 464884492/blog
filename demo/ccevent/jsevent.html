@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试原生js自定义事件</title>
+
+</head>
+
+<body>
+    <button id="btn">测试事件冒泡</button>
+</body>
+<script text="javascript">
+//  CustomEvent
+let cusEvent = new Event("custom", {
+    bubbles: true //允许冒泡
+});
+document.body.addEventListener("custom", e => {
+    console.log("自定义事件");
+    console.log(" Body event by custom");
+});
+
+let btn = document.querySelector("#btn");
+btn.addEventListener("custom", e => {
+    console.log("自定义事件");
+    console.log("Button event by custom");
+})
+btn.dispatchEvent(cusEvent);
+</script>
+
+</html>
