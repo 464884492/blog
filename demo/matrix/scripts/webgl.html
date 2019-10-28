@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webglTest</title>
+    <style>
+        #canvas {
+            border: solid 1px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <img id="img" src="../textures/motionstreak/rectangel1.png" />
+    <script>
+
+        const VSHADER_SOURCE =
+            `attribute vec4 a_Position;
+            attribute vec2 a_TexCoord;
+            varying vec2 v_TexCoord;
+            void main() {
+                gl_Position = a_Position;
+                v_TexCoord = a_TexCoord;
+            }`;
+
+        const FSHADER_SOURCE =
+            `precision mediump float;
+            uniform sampler2D u_Sampler;
+            varying vec2 v_TexCoord;
+            void main() {
+                gl_FragColor = texture2D(u_Sampler, v_TexCoord);
+            }`;
+        const c = document.querySelector("#canvas");
+        const gl = c.getContext("webgl");
+        const img = document.querySelector("#img");
+        let img2 = new Image();
+        img2.onload = function () {
+            //   gl.drawImage(img2, 0, 0);
+
+            gl.clearColor(0, 0, 0, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
+                alert("fail");
+                return;
+            }
+            gl.images = [img];
+            const n = initVertexBuffers(gl);
+            initTextures(gl, n, 0);
+        }
+        img2.src = img.src;
+
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                alert("fail");
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+        function initShaders(gl, vsSource, fsSource) {
+            const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            const shaderProgram = gl.createProgram();
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+            gl.linkProgram(shaderProgram);
+
+            if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+                alert("fail");
+                return null;
+            }
+            gl.program = shaderProgram;
+            return shaderProgram;
+        }
+
+        function initVertexBuffers(gl) {
+            // 顶点坐标和纹理图像坐标
+            const vertices = new Float32Array([
+                -0.3, 0.7, 0.0, 0.0, 1.0,
+                -0.3, -0.7, 0.0, 0.0, 0.0,
+                0.3, 0.7, 0.0, 1.0, 1.0,
+                0.3, -0.7, 0.0, 1.0, 0.0,
+            ]);
+
+            const FSIZE = vertices.BYTES_PER_ELEMENT;
+
+            const vertexBuffer = gl.createBuffer();
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            const a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+            const a_TexCoord = gl.getAttribLocation(gl.program, 'a_TexCoord');
+
+            gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 5, 0);
+            gl.enableVertexAttribArray(a_Position);
+
+            gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, FSIZE * 5, FSIZE * 3);
+            gl.enableVertexAttribArray(a_TexCoord);
+
+            return 4;
+        }
+
+        function initTextures(gl, n, index) {
+            // 创建纹理对象
+            const texture = gl.createTexture();
+            const u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler');
+            const image = gl.images[index];
+
+            // WebGL纹理坐标中的纵轴方向和PNG，JPG等图片容器的Y轴方向是反的，所以先反转Y轴
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+
+            // 激活纹理单元，开启index号纹理单元
+            gl.activeTexture(gl[`TEXTURE${index}`]);
+
+            // 绑定纹理对象
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+
+            // 配置纹理对象的参数
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
+            // 将纹理图像分配给纹理对象
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+            // 将纹理单元编号传给着色器
+            gl.uniform1i(u_Sampler, index);
+
+            // 绘制
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
+        }
+    </script>
+</body>
+
+</html>
