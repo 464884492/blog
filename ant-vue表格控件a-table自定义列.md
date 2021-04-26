@@ -10,9 +10,10 @@
 
 在查看文档过程中，在类型一栏中经常看到 `xxx|slot |slot-scope` 这样的描述信息。比如`customRender`在文档中的描述信息
 
-```text
-customRender | 生成复杂数据的渲染函数.. | **Function(text, record, index) {}|slot-scope**
-```
+
+|属性|说明|类型|
+| -- | -- | -- |
+customRender|生成复杂数据的渲染函数.. |Function(text, record, index){}\|slot-scope
 
 在最初一直以为在列中可以是如下配置的
 
